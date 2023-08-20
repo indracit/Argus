@@ -1,6 +1,7 @@
 import '../styles/dashboard.scss'
 import Bclogin_chart from '../components/Bclogin_chart'
 import Txn_Barchart from '../components/Txn_BarChart'
+import { useState } from 'react'
 
 const data = [{ name: "Active Bcs", value: 100 },
 { name: "Todays Active", value: 70},
@@ -42,17 +43,27 @@ const txn_data = [
   ]
 
 const Dashboard = () => {
+
+	const [menu,setMenu] = useState('BM');
+
+	
     return (
         <div className='dashbaord'>
-            <span>
+			<div className='heading'>
+				<span className={menu=='BM' ? 'active-menu' : ''} onClick={()=> setMenu('BM')}>Bc Monitoring</span>
+				<span className={menu == 'TM' ? 'active-menu' : ''} onClick={()=> setMenu('TM')}>Transaction Monitoring</span>
+			</div>
+
+			<div className='charts'>
+            { menu=='BM' ? <span>
             <Bclogin_chart data={data}/>
-            <p> Total bcs : 150</p>
-            </span>
-            
-            <span>
+            <p className='pie-text'> Total Bcs : 150</p>
+            </span> : <span>
                 <Txn_Barchart data={txn_data}/>
-                <p> Txn data</p>
-            </span>
+                <p className='bar-text'> Transaction Data</p>
+            </span> }
+            </div>
+            
         </div>
     )
 }

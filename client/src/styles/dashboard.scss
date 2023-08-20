@@ -1,11 +1,72 @@
 
 .dashbaord{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 70vw;
     height: 100vh;
 
     p{
         text-align: center;
     }
+    
+    .pie-text{
+        position: relative;
+        top: -60px;
+    }
+    .bar-text{
+        position: relative;
+        top:50px;
+    }
+    .charts{
+        margin-top: 20px;
+        height: 60%;
+    }
+
+    .heading{
+        width: 70vw;
+        overflow: hidden;
+        display: flex;
+        justify-content:space-evenly;
+        align-items: center;
+        height: 40px;
+        border-bottom:rgb(215, 213, 213) 1px solid;
+        // background-color: aliceblue;
+
+
+        span{
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+            height: 100%;
+            // background-color: aliceblue;
+            &:hover{
+                background-color: whitesmoke;
+                color:  #0062d1;
+            }
+
+            
+        }
+        .active-menu{
+            color:  #0062d1;
+        }
+    }
+
 }
+
+.bar-space{
+    display: flex;
+    
+    .data-card{
+        display: flex;
+        flex-direction: column;
+        
+    }
+}
+
