@@ -29,7 +29,7 @@ export default function Txn_Barchart({data}) {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="sucess" stackId="a" fill="#8884d8" />
+      <Bar dataKey="success" stackId="a" fill="#8884d8" />
       <Bar dataKey="failure" stackId="a" fill="#82ca9d" />
     </BarChart>
   );

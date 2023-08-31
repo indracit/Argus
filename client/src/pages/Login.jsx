@@ -16,18 +16,19 @@ const Login = () => {
 
         e.preventDefault();
 
-        const response   = await axiosInstance.post('/auth/login ',
-        {username:username,password:password},
+        const response   = await axiosInstance.post('/login',
+        JSON.stringify({username:username,password:password}),
 
             {
                 headers: { 'Content-Type': 'application/json' },
+                withCredentials: true, credentials: 'include'
             }
         ). then((response) => response.data)
         
         if(response.accessToken){
             setAuth(response)
             navigate('/dashboard')
-            console.log(response);
+            // console.log(response);
             
         }
     }

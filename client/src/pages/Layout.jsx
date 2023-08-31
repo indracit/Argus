@@ -1,14 +1,27 @@
 import { Outlet } from "react-router-dom"
 import '../styles/layout.scss'
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation ,useNavigate} from 'react-router-dom';
 import { MdOutlineDashboard } from "react-icons/md";
 import {LuLogOut} from "react-icons/lu";
 import {HiOutlineDocumentReport} from "react-icons/hi";
+import axiosInstance from '../api/axios';
+import useAuth from "../hooks/useAuth";
 
 
 const Layout = () => {
     let location = useLocation();
+    const navigate = useNavigate();
+    const {setAuth} = useAuth();
+
+    const handleLogout = async() => {
+        navigate('/');
+        setAuth({})
+        const response   = await axiosInstance.post('/logout',{},{ withCredentials: true, credentials: 'include' })
+                            . then((response) => response.data);
+        console.log(response);
+
+    }
 
     
     return (
@@ -33,8 +46,7 @@ const Layout = () => {
                 </Link>
                 
             </div>
-           
-            <h4>
+            <h4 onClick={handleLogout}>
                 <LuLogOut style={{fontSize:"1.3rem" }}/>
                 <span>Logout</span>
             </h4>

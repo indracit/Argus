@@ -10,7 +10,7 @@ const Requiredauth = () => {
     return (
     <div>
         {   
-            auth ? <Outlet/> : 'Unauthorized Access'
+            auth ? <Outlet/> : <h1> Unauthorized Access</h1>
         }
 
     </div>

@@ -43,17 +43,20 @@ const login = async (req,res) => {
 
     res.cookie('jwt',refreshtoken,{
         httpOnly : true,
-        secure : true,
-        sameSite : 'None',
+        // secure : false,
+        // sameSite : 'None',
         maxAge : 7 * 24 * 60 * 60 * 1000
     })
 
     res.json({ accessToken })
 }
 
+
+
 const refresh = async(req,res) => {
     const cookies   = req.cookies
-
+    // console.log(req);
+    console.log(cookies);
     if(!cookies?.jwt) return res.status(401).json({message: 'Unauthorized'})
     const refreshToken = cookies.jwt;
     jwt.verify(refreshToken,refreshTokenSecret, async(err,decoded)=>{
@@ -68,7 +71,7 @@ const refresh = async(req,res) => {
                     "roles": foundUser.roles
                 }
             },
-            process.env.ACCESS_TOKEN_SECRET,
+            accessTokenSecret,
             { expiresIn: '15m' }
         )
 
@@ -78,13 +81,12 @@ const refresh = async(req,res) => {
 
 const logout = async(req,res) => {
     const cookies = req.cookies
+    // console.log(req);
     console.log(cookies);
-    if (!cookies?.jwt) return res.sendStatus(204) //No content
-    res.clearCookie('jwt', { 
-        httpOnly: true, 
-        sameSite: 'None', 
-        secure: true
-})
+    // if (!cookies?.jwt) return res.json({message: 'no cookies'}) //No content
+    res.clearCookie('jwt','', {
+        domain: 'localhost', path: '/' })
+    
     res.json({ message: 'Cookie cleared' })
 }
 
