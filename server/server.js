@@ -1,7 +1,7 @@
 const express = require('express');
 const {port}  = require('./nodeAppConfig.json');
 const {reqLogger,logger} = require('./middlewares/logger');
-const dbConn = require('./config/dbConfig');
+const {mongoDB} = require('./config/dbConfig');
 const mongoose = require('mongoose');
 var cors = require('cors')
 const verifyJWT = require('./middlewares/verifyJwt')
@@ -9,14 +9,14 @@ var cookieParser = require('cookie-parser')
 const app = express();
 
 
-dbConn()
+mongoDB()
 .catch(err => logger('error',`${err.message}`));
 
 var whitelist = ['http://localhost:5173','http://localhost:3000']
 var corsOptions = {
   
   origin: function (origin, callback) {
-    console.log(origin);
+    // console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
@@ -34,7 +34,7 @@ app.use(reqLogger);
 
 app.use('/',require('./routes/authRoute'));
 app.use('/user',verifyJWT,require('./routes/userRoute'))
-app.use('/app', verifyJWT,require('./routes/appRoute'))
+app.use('/app',require('./routes/appRoute'))
 
 mongoose.connection.once('open', () => {
     logger('info',{message:'mongodb connected'});

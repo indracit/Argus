@@ -1,8 +1,9 @@
-const app = require('../controllers/appController')
+const {insights, reports} = require('../controllers/appController')
 const express = require('express')
 const router = express.Router();
 
 
-router.route('/').get(app)
+router.route('/').post(insights);
+router.route('/reports').post(reports);
 
 module.exports = router
