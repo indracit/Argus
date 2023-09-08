@@ -1,33 +1,18 @@
 import '../styles/dashboard.scss'
 import DashboardBox from '../components/DashboardBox';
 import DataGrid from '../components/DataGrid';
-import axiosInstance from "../api/axios";
+import useFetch from '../hooks/useFetch';
 import { useEffect } from 'react';
-import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
 
-    const {auth} = useAuth();
+    const [loading,error,data] = useFetch('/app',{query:'test'});
 
-    const fetch = async ()=> {
-        const response   = await axiosInstance.post('/app',
-        JSON.stringify({query:'test'}),
-
-            {
-                headers: { 'Content-Type': 'application/json',Authorization: `Bearer ${auth.accessToken}` },
-                withCredentials: true, credentials: 'include',
-                
-            }
-        ). then((response) => response.data)
-
-        console.log(response);
-    }
-
-    useEffect( ()=>{
-        
-        fetch();
-
-    },[])
+    useEffect(()=>{
+        console.log(loading);
+        console.log(loading);
+        console.log(data);  
+    })
 
     return (
         <div className='dashboard'>
