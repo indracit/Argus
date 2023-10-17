@@ -27,7 +27,7 @@ const Login = () => {
         
         if(response.accessToken){
             setAuth(response)
-            navigate('/dashboard')
+            navigate('/rrndetails')
             // console.log(response);
             
         }

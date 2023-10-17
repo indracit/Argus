@@ -31,10 +31,10 @@ const Layout = () => {
             <h1>Argus</h1>
             <div className="menu">
             <div>
-            <Link to='/dashboard' className="link">
-            <h4 className={location.pathname=='/dashboard' ? 'menu-active' : ''}>
+            <Link to='/rrndetails' className="link">
+            <h4 className={location.pathname=='/rrndetails' ? 'menu-active' : ''}>
                 <MdOutlineDashboard style={{fontSize:"1.3rem" }}/>
-                <span>Dashboard</span>
+                <span>RRN Details</span>
             </h4>
             </Link>
 

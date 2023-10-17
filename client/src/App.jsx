@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
-import Dashboard from "./pages/Dashboard";
+import Rrndetails from "./pages/Rrndetails";
 import Login from "./pages/Login";
 import Reports from "./pages/Reports";
 import Requiredauth from "./components/Requiredauth";
@@ -15,8 +15,8 @@ const App = () => {
       <Route path="/" element={ <Requiredauth/>}>
       <Route path='/' element={<Layout/>}>
         <Route 
-          path='/dashboard'
-          element={<Dashboard/>}
+          path='/rrndetails'
+          element={<Rrndetails/>}
         />
         <Route 
           path='/reports'

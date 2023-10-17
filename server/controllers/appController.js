@@ -1,16 +1,15 @@
-const fetch = require('../utils/fetch');
-const  { insight_queries,report_queries } = require("../queries/queries");
+const {oracleFetch,mysqlFetch} = require('../utils/fetch');
 
-const insights = async(req, res) => {
-    
-    res.json(await fetch(insight_queries[req.body.query]));
-}
 
 const reports = async(req, res) => {
-    res.json(await fetch(report_queries[req.body.query]));
+    let query = 'SELECT 1 + 1 AS "solution" from dual';
+    let oracleresult = await oracleFetch(query);
+    let mysqlresult =  await mysqlFetch(query);
+    res.json({'mysqlresult':mysqlresult,'oracleresult':oracleresult})
 }
 
 
-module.exports = {insights,reports}
+
+module.exports = {reports}
 
 

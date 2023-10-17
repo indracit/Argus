@@ -20,8 +20,8 @@ var corsOptions = {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
-      // callback(null, true)
-      callback(new Error('Not allowed by CORS'))
+      callback(null, true)
+      // callback(new Error('Not allowed by CORS'))
     }
   },
   credentials: true
@@ -34,7 +34,7 @@ app.use(reqLogger);
 
 app.use('/',require('./routes/authRoute'));
 app.use('/user',verifyJWT,require('./routes/userRoute'))
-app.use('/app',verifyJWT,require('./routes/appRoute'))
+app.use('/app',require('./routes/appRoute'))
 
 mongoose.connection.once('open', () => {
     logger('info',{message:'mongodb connected'});
