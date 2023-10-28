@@ -4,16 +4,18 @@ import { useState } from 'react'
 import axiosInstance from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+// import Loader from '../components/Loader';
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { setAuth} = useAuth() ;
+    // const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async  (e) => {
-
+        // setLoading(true);
         e.preventDefault();
 
         const response   = await axiosInstance.post('/login',
@@ -23,14 +25,20 @@ const Login = () => {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true, credentials: 'include'
             }
-        ). then((response) => response.data)
-        
+        ). then((response) => {
+            
+            return response.data})
+
+            if(response.message){
+                alert(response.message);
+            }
         if(response.accessToken){
             setAuth(response)
             navigate('/rrndetails')
             // console.log(response);
             
         }
+        // setLoading(false)
     }
 
 
