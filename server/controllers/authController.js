@@ -11,23 +11,28 @@ const login = async (req,res) => {
     if(!username || !password) {
         const message = {'message' : 'all field are required'};
         logger('info',message);
-        return res.status(400).json(message);
+        return res.status(200).json(message);
     }
 
     const foundUser = await  User.findOne({username}).exec();
 
-    if(!foundUser || !foundUser.active){
-        const message = {message : "unauthorized"};
+    if(!foundUser ){
+        const message = {message : "User not found !"};
         logger('info',message);
-        return res.status(401).json(message);
+        return res.status(200).json(message);
+    }
+    if(!foundUser.active){
+        const message = {message : "User is not active !"};
+        logger('info',message);
+        return res.status(200).json(message);
     }
 
     const match = await bcrypt.compare(password,foundUser.password);
     
     if(!match){
-        const message = {'message' : 'all field are required'};
+        const message = {'message' : 'Invalid username or password!'};
         logger('info',message)
-        return res.status(401).json(message);
+        return res.status(200).json(message);
     }
 
     const accessToken = jwt.sign({

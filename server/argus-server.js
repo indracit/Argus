@@ -7,7 +7,9 @@ var cors = require('cors')
 const verifyJWT = require('./middlewares/verifyJwt')
 var cookieParser = require('cookie-parser')
 const app = express();
+const path = require('path');
 
+app.use(express.static(path.join(__dirname,'dist')));
 
 mongoDB()
 .catch(err => logger('error',`${err.message}`));

@@ -5,9 +5,9 @@ const mysql    = require('mysql');
 
 const oracleDB = async () => {
     return  await oracledb.getConnection({
-        user          : "indrajit",
-        password      : 'Indracit0',  
-        connectString : "localhost/orcl"
+        user          : "ITGMIS",
+        password      : 'itgmis_1234',  
+        connectString : "10.100.71.121:1584/fimis"
     })}
 
 
@@ -17,11 +17,11 @@ const  mongoDB = async () =>{
 
 const mySqlDb =  async () => {
     return  await mysql.createConnection({
-        host     : 'localhost',
-        port : '3306',
-        user     : 'root',
-        password : 'Indracit@0',
-        database : 'test'
+        host     : '10.100.66.7',
+        port : '3307',
+        user     : 'integra',
+        password : 'Integra@123',
+        database : 'iss_ibfi_prod'
         });
 }
 
